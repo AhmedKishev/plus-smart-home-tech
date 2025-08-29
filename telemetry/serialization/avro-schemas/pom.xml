@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>avro-schemas</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.avro</groupId>
