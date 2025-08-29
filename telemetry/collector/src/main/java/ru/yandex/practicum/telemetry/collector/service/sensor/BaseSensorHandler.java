@@ -1,8 +1,8 @@
 package ru.yandex.practicum.telemetry.collector.service.sensor;
 
-import ru.yandex.practicum.telemetry.collector.model.sensor.SensorEvent;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import ru.yandex.practicum.telemetry.collector.model.sensor.SensorEvent;
 import ru.yandex.practicum.telemetry.collector.service.KafkaEventProducer;
 
 public abstract class BaseSensorHandler implements SensorEventHandler {

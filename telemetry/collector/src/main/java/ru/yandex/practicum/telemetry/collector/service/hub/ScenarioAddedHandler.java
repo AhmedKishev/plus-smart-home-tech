@@ -1,5 +1,8 @@
 package ru.yandex.practicum.telemetry.collector.service.hub;
 
+import org.apache.avro.specific.SpecificRecordBase;
+import org.springframework.stereotype.Component;
+import ru.yandex.practicum.kafka.telemetry.event.*;
 import ru.yandex.practicum.telemetry.collector.model.enums.ActionDevice;
 import ru.yandex.practicum.telemetry.collector.model.enums.HubEventType;
 import ru.yandex.practicum.telemetry.collector.model.enums.Operations;
@@ -8,9 +11,6 @@ import ru.yandex.practicum.telemetry.collector.model.hub.DeviceAction;
 import ru.yandex.practicum.telemetry.collector.model.hub.HubEvent;
 import ru.yandex.practicum.telemetry.collector.model.hub.ScenarioAddedEvent;
 import ru.yandex.practicum.telemetry.collector.model.hub.ScenarioCondition;
-import org.apache.avro.specific.SpecificRecordBase;
-import org.springframework.stereotype.Component;
-import ru.yandex.practicum.kafka.telemetry.event.*;
 import ru.yandex.practicum.telemetry.collector.service.KafkaEventProducer;
 
 import java.util.List;

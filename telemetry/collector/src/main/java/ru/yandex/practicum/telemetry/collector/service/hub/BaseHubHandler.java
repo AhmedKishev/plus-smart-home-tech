@@ -2,9 +2,9 @@ package ru.yandex.practicum.telemetry.collector.service.hub;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.telemetry.collector.model.hub.HubEvent;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import ru.yandex.practicum.telemetry.collector.model.hub.HubEvent;
 import ru.yandex.practicum.telemetry.collector.service.KafkaEventProducer;
 
 

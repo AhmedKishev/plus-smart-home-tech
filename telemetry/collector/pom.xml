@@ -63,7 +63,7 @@
                     <mainClass>ru.yandex.practicum.telemetry.collector.Collector</mainClass>
                 </configuration>
             </plugin>
-    
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

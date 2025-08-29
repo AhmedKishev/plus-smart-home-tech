@@ -1,19 +1,17 @@
 package ru.yandex.practicum.telemetry.collector.service;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.kafka.common.errors.SerializationException;
-import ru.yandex.practicum.telemetry.collector.configuration.KafkaConfig;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.errors.SerializationException;
 import org.springframework.stereotype.Component;
+import ru.yandex.practicum.telemetry.collector.configuration.KafkaConfig;
 
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeoutException;
 
 @Component
