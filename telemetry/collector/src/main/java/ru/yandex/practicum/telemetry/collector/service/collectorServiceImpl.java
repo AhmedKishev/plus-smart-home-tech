@@ -1,6 +1,8 @@
 package ru.yandex.practicum.telemetry.collector.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.telemetry.collector.builders.hub.HubEventBuilder;
 import ru.yandex.practicum.telemetry.collector.builders.sensor.SensorEventBuilder;
@@ -14,10 +16,11 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class collectorServiceImpl implements CollectorService {
 
-    private final Map<SensorEventType, SensorEventBuilder> sensorEventBuilders;
-    private final Map<HubEventType, HubEventBuilder> hubEventBuilders;
+    Map<SensorEventType, SensorEventBuilder> sensorEventBuilders;
+    Map<HubEventType, HubEventBuilder> hubEventBuilders;
 
     @Override
     public void collectSensorEvent(SensorEvent sensor) {

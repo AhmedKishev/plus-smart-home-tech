@@ -1,6 +1,8 @@
 package ru.yandex.practicum.telemetry.collector.builders.sensor;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.yandex.practicum.telemetry.collector.model.enums.SensorEventType;
@@ -10,12 +12,13 @@ import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SensorEventBuilderConfig {
-    private final ClimateSensorBuilder climateSensorBuilder;
-    private final LightSensorBuilder lightSensorBuilder;
-    private final MotionSensorBuilder motionSensorBuilder;
-    private final SwitchSensorBuilder switchSensorBuilder;
-    private final TemperatureSensorBuilder temperatureSensorBuilder;
+    ClimateSensorBuilder climateSensorBuilder;
+    LightSensorBuilder lightSensorBuilder;
+    MotionSensorBuilder motionSensorBuilder;
+    SwitchSensorBuilder switchSensorBuilder;
+    TemperatureSensorBuilder temperatureSensorBuilder;
 
     @Bean
     public Map<SensorEventType, SensorEventBuilder> getSensorEventBuilders() {
