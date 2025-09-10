@@ -57,7 +57,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <mainClass>ru.yandex.practicum.aggregator.AggregatorStarter</mainClass>
+                    <mainClass>ru.yandex.practicum.aggregator.AggregatorApplication</mainClass>
                 </configuration>
             </plugin>
 
