@@ -57,7 +57,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <mainClass>ru.yandex.practicum.telemetry.collector.gRPC.Collector</mainClass>
+                    <mainClass>ru.yandex.practicum.aggregator.AggregatorStarter</mainClass>
                 </configuration>
             </plugin>
 
