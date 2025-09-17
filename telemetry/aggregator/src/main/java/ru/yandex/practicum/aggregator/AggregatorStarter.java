@@ -3,6 +3,7 @@ package ru.yandex.practicum.aggregator;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -31,8 +32,11 @@ public class AggregatorStarter {
     SensorEventHandler sensorEventHandler;
 
     @Value("${aggregator.topic.telemetry-snapshots}")
+    @NonFinal
     String snapshotsTopic;
+
     @Value("${topic.telemetry-sensors}")
+    @NonFinal
     String sensorsTopic;
 
     public void start() {

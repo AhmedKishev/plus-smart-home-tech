@@ -1,6 +1,9 @@
 package ru.yandex.practicum.analyzer.processors;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -19,13 +22,15 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HubEventProcessor implements Runnable {
 
-    private final Consumer<String, HubEventAvro> consumer;
-    private final HubHandler hubHandler;
+    Consumer<String, HubEventAvro> consumer;
+    HubHandler hubHandler;
 
     @Value("${topic.hub-event-topic}")
-    private String topic;
+    @NonFinal
+    String topic;
 
     @Override
     public void run() {

@@ -15,10 +15,10 @@ public class Scenario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-      Long id;
+    Long id;
 
     @Column(name = "hub_id")
-      String hubId;
+    String hubId;
 
-      String name;
+    String name;
 }

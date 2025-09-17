@@ -17,18 +17,18 @@ public class Action {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
+    Long id;
 
     @Enumerated(EnumType.STRING)
-     ActionTypeAvro type;
+    ActionTypeAvro type;
 
-     Integer value;
+    Integer value;
 
     @ManyToOne
     @JoinColumn(name = "scenario_id", table = "scenario_actions")
-     Scenario scenario;
+    Scenario scenario;
 
     @ManyToOne
     @JoinColumn(name = "sensor_id", table = "scenario_actions")
-     Sensor sensor;
+    Sensor sensor;
 }

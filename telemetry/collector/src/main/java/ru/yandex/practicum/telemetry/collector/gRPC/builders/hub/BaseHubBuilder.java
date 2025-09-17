@@ -16,7 +16,6 @@ public abstract class BaseHubBuilder implements HubEventBuilder {
     private final KafkaEventProducer producer;
 
     @Value("${topic.telemetry-hubs}")
-
     private String topic;
 
     @Override

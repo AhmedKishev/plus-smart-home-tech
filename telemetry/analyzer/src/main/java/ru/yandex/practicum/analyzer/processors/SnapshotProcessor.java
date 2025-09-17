@@ -1,6 +1,9 @@
 package ru.yandex.practicum.analyzer.processors;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -17,13 +20,15 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SnapshotProcessor implements Runnable {
 
-    private final Consumer<String, SensorsSnapshotAvro> consumer;
-    private final SnapshotHandler snapshotHandler;
+    Consumer<String, SensorsSnapshotAvro> consumer;
+    SnapshotHandler snapshotHandler;
 
     @Value("${topic.snapshots-topic}")
-    private String topic;
+    @NonFinal
+    String topic;
 
     public void run() {
         try {

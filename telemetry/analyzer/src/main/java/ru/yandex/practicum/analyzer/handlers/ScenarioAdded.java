@@ -27,10 +27,10 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ScenarioAdded implements HubEventHandler {
 
-      ScenarioRepository scenarioRepository;
-      ConditionRepository conditionRepository;
-      ActionRepository actionRepository;
-      SensorRepository sensorRepository;
+    ScenarioRepository scenarioRepository;
+    ConditionRepository conditionRepository;
+    ActionRepository actionRepository;
+    SensorRepository sensorRepository;
 
     @Override
     @Transactional
