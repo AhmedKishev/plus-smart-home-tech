@@ -1,5 +1,7 @@
 package ru.yandex.practicum.analyzer;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -7,12 +9,13 @@ import org.springframework.context.annotation.Bean;
 import java.util.concurrent.*;
 
 @SpringBootApplication
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class Analyzer {
 
-    private final int arrayBlockingQueueCapacity = 2;
-    private final int threadPoolCorePoolSize = 2;
-    private final int threadPoolMaximumPoolSize = 2;
-    private final long threadPoolKeepAliveTime = 60L;
+    int arrayBlockingQueueCapacity = 2;
+    int threadPoolCorePoolSize = 2;
+    int threadPoolMaximumPoolSize = 2;
+    long threadPoolKeepAliveTime = 60L;
 
     public static void main(String[] args) {
         SpringApplication.run(Analyzer.class, args);

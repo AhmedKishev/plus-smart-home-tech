@@ -1,6 +1,8 @@
 package ru.yandex.practicum.analyzer.handlers;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.analyzer.client.HubRouterClient;
@@ -17,12 +19,13 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SnapshotHandler {
 
-    private final ConditionRepository conditionRepository;
-    private final ScenarioRepository scenarioRepository;
-    private final ActionRepository actionRepository;
-    private final HubRouterClient hubRouterClient;
+    ConditionRepository conditionRepository;
+    ScenarioRepository scenarioRepository;
+    ActionRepository actionRepository;
+    HubRouterClient hubRouterClient;
 
     public void buildSnapshot(SensorsSnapshotAvro sensorsSnapshot) {
         Map<String, SensorStateAvro> sensorStateMap = sensorsSnapshot.getSensorsState();

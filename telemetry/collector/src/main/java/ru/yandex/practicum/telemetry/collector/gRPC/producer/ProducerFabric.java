@@ -1,5 +1,7 @@
 package ru.yandex.practicum.telemetry.collector.gRPC.producer;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -11,16 +13,17 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 @Configuration
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProducerFabric {
 
     @Value("${spring.kafka.producer.bootstrap-servers}")
-    private String bootstrapServers;
+    String bootstrapServers;
 
     @Value("${spring.kafka.producer.key-serializer}")
-    private String keySerializer;
+    String keySerializer;
 
     @Value("${spring.kafka.producer.value-serializer}")
-    private String valueSerializer;
+    String valueSerializer;
 
     @Bean
     public Producer<String, SpecificRecordBase> getProducer() {

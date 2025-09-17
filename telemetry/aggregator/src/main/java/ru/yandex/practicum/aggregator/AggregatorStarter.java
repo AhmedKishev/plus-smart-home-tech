@@ -1,6 +1,8 @@
 package ru.yandex.practicum.aggregator;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -21,16 +23,17 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AggregatorStarter {
 
-    private final Consumer<String, SpecificRecordBase> consumer;
-    private final Producer<String, SpecificRecordBase> producer;
-    private final SensorEventHandler sensorEventHandler;
+    Consumer<String, SpecificRecordBase> consumer;
+    Producer<String, SpecificRecordBase> producer;
+    SensorEventHandler sensorEventHandler;
 
     @Value("${aggregator.topic.telemetry-snapshots}")
-    private String snapshotsTopic;
+    String snapshotsTopic;
     @Value("${topic.telemetry-sensors}")
-    private String sensorsTopic;
+    String sensorsTopic;
 
     public void start() {
         try {

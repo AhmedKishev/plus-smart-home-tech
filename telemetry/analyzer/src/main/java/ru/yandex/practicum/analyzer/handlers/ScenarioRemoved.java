@@ -1,6 +1,8 @@
 package ru.yandex.practicum.analyzer.handlers;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,11 +18,12 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ScenarioRemoved implements HubEventHandler {
 
-    private final ScenarioRepository scenarioRepository;
-    private final ConditionRepository conditionRepository;
-    private final ActionRepository actionRepository;
+    ScenarioRepository scenarioRepository;
+    ConditionRepository conditionRepository;
+    ActionRepository actionRepository;
 
     @Override
     @Transactional
