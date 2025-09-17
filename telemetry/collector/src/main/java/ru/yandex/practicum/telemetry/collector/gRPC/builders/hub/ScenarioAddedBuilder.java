@@ -78,7 +78,7 @@ public class ScenarioAddedBuilder extends BaseHubBuilder {
                                     case UNRECOGNIZED -> null;
                                 }
                         )
-                        .setValue(da.getValue())
+                        .setValue((int) da.getValue())
                         .build())
                 .toList();
     }
