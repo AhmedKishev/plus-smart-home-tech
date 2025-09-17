@@ -1,8 +1,7 @@
 package ru.yandex.practicum.analyzer.handlers;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.analyzer.model.Sensor;
@@ -10,31 +9,30 @@ import ru.yandex.practicum.analyzer.repository.SensorRepository;
 import ru.yandex.practicum.kafka.telemetry.event.DeviceAddedEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.HubEventAvro;
 
-
+@Slf4j
 @Component
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Transactional
 @RequiredArgsConstructor
 public class DeviceAdded implements HubEventHandler {
 
-    SensorRepository sensorRepository;
+    private final SensorRepository sensorRepository;
 
     @Override
-    public void handle(HubEventAvro hub) {
-        sensorRepository.save(buildToSensor(hub));
-    }
-
-    private Sensor buildToSensor(HubEventAvro hub) {
-        DeviceAddedEventAvro deviceAddedEventAvro = (DeviceAddedEventAvro) hub.getPayload();
-
-        return Sensor.builder()
-                .id(deviceAddedEventAvro.getId())
-                .hubId(hub.getHubId())
-                .build();
+    @Transactional
+    public void handle(HubEventAvro hubEvent) {
+        sensorRepository.save(buildToSensor(hubEvent));
     }
 
     @Override
     public String getMessageType() {
         return DeviceAddedEventAvro.class.getSimpleName();
+    }
+
+    private Sensor buildToSensor(HubEventAvro hubEvent) {
+        DeviceAddedEventAvro deviceAddedEvent = (DeviceAddedEventAvro) hubEvent.getPayload();
+
+        return Sensor.builder()
+                .id(deviceAddedEvent.getId())
+                .hubId(hubEvent.getHubId())
+                .build();
     }
 }

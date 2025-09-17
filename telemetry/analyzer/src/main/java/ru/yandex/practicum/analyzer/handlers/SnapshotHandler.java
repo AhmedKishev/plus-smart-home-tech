@@ -1,10 +1,8 @@
 package ru.yandex.practicum.analyzer.handlers;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.analyzer.client.HubRouterClient;
 import ru.yandex.practicum.analyzer.model.Condition;
 import ru.yandex.practicum.analyzer.model.Scenario;
@@ -16,15 +14,15 @@ import ru.yandex.practicum.kafka.telemetry.event.*;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
-@Transactional
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class SnapshotHandler {
-    HubRouterClient hubRouterClient;
-    ConditionRepository conditionRepository;
-    ActionRepository actionRepository;
-    ScenarioRepository scenarioRepository;
+
+    private final ConditionRepository conditionRepository;
+    private final ScenarioRepository scenarioRepository;
+    private final ActionRepository actionRepository;
+    private final HubRouterClient hubRouterClient;
 
     public void buildSnapshot(SensorsSnapshotAvro sensorsSnapshot) {
         Map<String, SensorStateAvro> sensorStateMap = sensorsSnapshot.getSensorsState();

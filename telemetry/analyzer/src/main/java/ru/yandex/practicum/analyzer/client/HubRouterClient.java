@@ -13,21 +13,21 @@ import ru.yandex.practicum.kafka.telemetry.event.ActionTypeAvro;
 
 import java.time.Instant;
 
-@Service
 @Slf4j
+@Service
 public class HubRouterClient {
 
-    private final HubRouterControllerGrpc.HubRouterControllerBlockingStub hubRouterController;
+    private final HubRouterControllerGrpc.HubRouterControllerBlockingStub hubRouterClient;
 
     public HubRouterClient(@GrpcClient("hub-router")
-                           HubRouterControllerGrpc.HubRouterControllerBlockingStub hubRouterController) {
-        this.hubRouterController = hubRouterController;
+                           HubRouterControllerGrpc.HubRouterControllerBlockingStub hubRouterClient) {
+        this.hubRouterClient = hubRouterClient;
     }
 
     public void sendAction(Action action) {
         DeviceActionRequest deviceActionRequest = buildActionRequest(action);
-        hubRouterController.handleDeviceAction(deviceActionRequest);
-        log.info("Действие {} отправлено в Hub-Router", deviceActionRequest);
+        hubRouterClient.handleDeviceAction(deviceActionRequest);
+        log.info("Действие {} отправлено в hub-router", deviceActionRequest);
     }
 
     private DeviceActionRequest buildActionRequest(Action action) {
@@ -42,7 +42,6 @@ public class HubRouterClient {
                 .setTimestamp(setTimestamp())
                 .build();
     }
-
 
     private ActionTypeProto actionTypeProto(ActionTypeAvro actionType) {
         return switch (actionType) {

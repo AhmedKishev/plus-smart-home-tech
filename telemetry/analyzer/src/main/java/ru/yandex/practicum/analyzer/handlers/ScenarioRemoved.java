@@ -1,8 +1,7 @@
 package ru.yandex.practicum.analyzer.handlers;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.analyzer.model.Scenario;
@@ -14,27 +13,28 @@ import ru.yandex.practicum.kafka.telemetry.event.ScenarioRemovedEventAvro;
 
 import java.util.Optional;
 
-@Transactional
+@Slf4j
 @Component
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class ScenarioRemoved implements HubEventHandler {
 
-    ActionRepository actionRepository;
-    ScenarioRepository scenarioRepository;
-    ConditionRepository conditionRepository;
+    private final ScenarioRepository scenarioRepository;
+    private final ConditionRepository conditionRepository;
+    private final ActionRepository actionRepository;
 
     @Override
-    public void handle(HubEventAvro hub) {
-        ScenarioRemovedEventAvro scenarioRemovedEventAvro = (ScenarioRemovedEventAvro) hub.getPayload();
-
-        Optional<Scenario> scenarioOpt = scenarioRepository.findByHubIdAndName(hub.getHubId(), scenarioRemovedEventAvro.getName());
+    @Transactional
+    public void handle(HubEventAvro hubEvent) {
+        ScenarioRemovedEventAvro scenarioRemovedEvent = (ScenarioRemovedEventAvro) hubEvent.getPayload();
+        Optional<Scenario> scenarioOpt = scenarioRepository.findByHubIdAndName(hubEvent.getHubId(), scenarioRemovedEvent.getName());
 
         if (scenarioOpt.isPresent()) {
             Scenario scenario = scenarioOpt.get();
             conditionRepository.deleteByScenario(scenario);
             actionRepository.deleteByScenario(scenario);
             scenarioRepository.delete(scenario);
+        } else {
+            log.info("Сценарий не найден.");
         }
     }
 
@@ -43,3 +43,4 @@ public class ScenarioRemoved implements HubEventHandler {
         return ScenarioRemovedEventAvro.class.getSimpleName();
     }
 }
+

@@ -1,31 +1,26 @@
 package ru.yandex.practicum.analyzer.handlers;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.analyzer.repository.SensorRepository;
-import ru.yandex.practicum.kafka.telemetry.event.DeviceAddedEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.DeviceRemovedEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.HubEventAvro;
 
-
+@Slf4j
 @Component
-@Transactional
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class DeviceRemoved implements HubEventHandler {
 
-    SensorRepository sensorRepository;
+    private final SensorRepository sensorRepository;
 
     @Override
-    public void handle(HubEventAvro hub) {
-        DeviceAddedEventAvro deviceAddedEventAvro = (DeviceAddedEventAvro) hub.getPayload();
-
-        sensorRepository.deleteByIdAndHubId(deviceAddedEventAvro.getId(), hub.getHubId());
+    @Transactional
+    public void handle(HubEventAvro hubEvent) {
+        DeviceRemovedEventAvro deviceRemovedEvent = (DeviceRemovedEventAvro) hubEvent.getPayload();
+        sensorRepository.deleteByIdAndHubId(deviceRemovedEvent.getId(), hubEvent.getHubId());
     }
-
 
     @Override
     public String getMessageType() {

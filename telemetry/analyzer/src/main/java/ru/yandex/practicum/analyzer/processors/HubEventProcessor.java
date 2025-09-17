@@ -1,6 +1,7 @@
 package ru.yandex.practicum.analyzer.processors;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,14 +16,16 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class HubEventProcessor implements Runnable {
 
     private final Consumer<String, HubEventAvro> consumer;
     private final HubHandler hubHandler;
-    @Value("${topic.telemetry-hubs}")
-    String topic;
+
+    @Value("${topic.hub-event-topic}")
+    private String topic;
 
     @Override
     public void run() {
@@ -37,6 +40,7 @@ public class HubEventProcessor implements Runnable {
                 for (ConsumerRecord<String, HubEventAvro> record : records) {
                     HubEventAvro event = record.value();
                     String payloadName = event.getPayload().getClass().getSimpleName();
+                    log.info("Получение хаба {}", payloadName);
                     if (mapBuilder.containsKey(payloadName)) {
                         mapBuilder.get(payloadName).handle(event);
                     } else {
@@ -47,6 +51,7 @@ public class HubEventProcessor implements Runnable {
             }
         } catch (WakeupException ignored) {
         } catch (Exception e) {
+            log.error("Ошибка получения данных {}", topic);
         } finally {
             try {
                 consumer.commitSync();

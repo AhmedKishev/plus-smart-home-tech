@@ -8,14 +8,14 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
 @Getter
+@Component
 public class HubHandler {
 
     private final Map<String, HubEventHandler> handlers;
 
-    public HubHandler(Set<HubEventHandler> differentHandler) {
-        this.handlers = differentHandler.stream()
+    public HubHandler(Set<HubEventHandler> handlers) {
+        this.handlers = handlers.stream()
                 .collect(Collectors.toMap(HubEventHandler::getMessageType, Function.identity()));
     }
 }

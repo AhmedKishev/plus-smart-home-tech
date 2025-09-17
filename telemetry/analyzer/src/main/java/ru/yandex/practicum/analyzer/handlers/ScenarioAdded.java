@@ -1,17 +1,17 @@
 package ru.yandex.practicum.analyzer.handlers;
 
-
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.practicum.analyzer.model.Action;
 import ru.yandex.practicum.analyzer.model.Condition;
 import ru.yandex.practicum.analyzer.model.Scenario;
 import ru.yandex.practicum.analyzer.repository.ActionRepository;
 import ru.yandex.practicum.analyzer.repository.ConditionRepository;
 import ru.yandex.practicum.analyzer.repository.ScenarioRepository;
 import ru.yandex.practicum.analyzer.repository.SensorRepository;
+import ru.yandex.practicum.kafka.telemetry.event.DeviceActionAvro;
 import ru.yandex.practicum.kafka.telemetry.event.HubEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.ScenarioAddedEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.ScenarioConditionAvro;
@@ -19,38 +19,63 @@ import ru.yandex.practicum.kafka.telemetry.event.ScenarioConditionAvro;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-@Transactional
 public class ScenarioAdded implements HubEventHandler {
 
-    ScenarioRepository scenarioRepository;
-    SensorRepository sensorRepository;
-    ConditionRepository conditionRepository;
-    ActionRepository actionRepository;
+    private final ScenarioRepository scenarioRepository;
+    private final ConditionRepository conditionRepository;
+    private final ActionRepository actionRepository;
+    private final SensorRepository sensorRepository;
 
     @Override
-    public void handle(HubEventAvro hub) {
-        ScenarioAddedEventAvro scenarioAdded = (ScenarioAddedEventAvro) hub.getPayload();
+    @Transactional
+    public void handle(HubEventAvro hubEvent) {
+        ScenarioAddedEventAvro scenarioAddedEvent = (ScenarioAddedEventAvro) hubEvent.getPayload();
+        Scenario scenario = scenarioRepository.findByHubIdAndName(hubEvent.getHubId(),
+                scenarioAddedEvent.getName()).orElseGet(() -> scenarioRepository.save(buildToScenario(hubEvent)));
 
-        Scenario scenario = scenarioRepository.findByHubIdAndName(hub.getHubId(),
-                scenarioAdded.getName()).orElseGet(() -> scenarioRepository.save(buildToScenario(hub, scenarioAdded)));
-
-        if (checkSensorsInScenarioConditions(scenarioAdded, hub.getHubId())) {
-            conditionRepository.saveAll(buildToCondition(scenarioAdded, scenario));
+        if (checkSensorsInScenarioConditions(scenarioAddedEvent, hubEvent.getHubId())) {
+            conditionRepository.saveAll(buildToCondition(scenarioAddedEvent, scenario));
         }
-
+        if (checkSensorsInScenarioActions(scenarioAddedEvent, hubEvent.getHubId())) {
+            actionRepository.saveAll(buildToAction(scenarioAddedEvent, scenario));
+        }
     }
 
-    private Set<Condition> buildToCondition(ScenarioAddedEventAvro scenarioAdded, Scenario scenario) {
-        return scenarioAdded.getConditions().stream()
+    @Override
+    public String getMessageType() {
+        return ScenarioAddedEventAvro.class.getSimpleName();
+    }
+
+    private Scenario buildToScenario(HubEventAvro hubEvent) {
+        ScenarioAddedEventAvro scenarioAddedEvent = (ScenarioAddedEventAvro) hubEvent.getPayload();
+        return Scenario.builder()
+                .name(scenarioAddedEvent.getName())
+                .hubId(hubEvent.getHubId())
+                .build();
+    }
+
+    private Set<Condition> buildToCondition(ScenarioAddedEventAvro scenarioAddedEvent, Scenario scenario) {
+        return scenarioAddedEvent.getConditions().stream()
                 .map(c -> Condition.builder()
-                        .sensor(sensorRepository.findById(Long.valueOf(c.getSensorId())).orElseThrow())
+                        .sensor(sensorRepository.findById(c.getSensorId()).orElseThrow())
                         .scenario(scenario)
                         .type(c.getType())
                         .operation(c.getOperation())
                         .value(setValue(c.getValue()))
+                        .build())
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Action> buildToAction(ScenarioAddedEventAvro scenarioAddedEvent, Scenario scenario) {
+        return scenarioAddedEvent.getActions().stream()
+                .map(action -> Action.builder()
+                        .sensor(sensorRepository.findById(action.getSensorId()).orElseThrow())
+                        .scenario(scenario)
+                        .type(action.getType())
+                        .value(action.getValue())
                         .build())
                 .collect(Collectors.toSet());
     }
@@ -63,22 +88,15 @@ public class ScenarioAdded implements HubEventHandler {
         }
     }
 
-    private Boolean checkSensorsInScenarioConditions(ScenarioAddedEventAvro scenarioAdded, String hubId) {
-        return sensorRepository.existsByIdInAndHubId(scenarioAdded.getConditions().stream()
+    private Boolean checkSensorsInScenarioConditions(ScenarioAddedEventAvro scenarioAddedEvent, String hubId) {
+        return sensorRepository.existsByIdInAndHubId(scenarioAddedEvent.getConditions().stream()
                 .map(ScenarioConditionAvro::getSensorId)
                 .toList(), hubId);
     }
 
-    private Scenario buildToScenario(HubEventAvro hub, ScenarioAddedEventAvro scenarioAdded) {
-
-        return Scenario.builder()
-                .name(scenarioAdded.getName())
-                .hubId(hub.getHubId())
-                .build();
-    }
-
-    @Override
-    public String getMessageType() {
-        return ScenarioAddedEventAvro.class.getSimpleName();
+    private Boolean checkSensorsInScenarioActions(ScenarioAddedEventAvro scenarioAddedEvent, String hubId) {
+        return sensorRepository.existsByIdInAndHubId(scenarioAddedEvent.getActions().stream()
+                .map(DeviceActionAvro::getSensorId)
+                .toList(), hubId);
     }
 }
