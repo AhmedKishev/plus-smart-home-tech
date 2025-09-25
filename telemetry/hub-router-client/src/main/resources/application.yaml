@@ -1,13 +1,13 @@
 spring:
   application:
-    name: aggregator
+    name: hub-router-client
   config:
-    import: 'configserver:'
+    import: "configserver:"
   cloud:
     config:
       discovery:
         enabled: true
-        serviceId: config-server
+        service-id: config-server
       fail-fast: true
       retry:
         useRandomPolicy: true
@@ -15,5 +15,7 @@ spring:
 
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+
