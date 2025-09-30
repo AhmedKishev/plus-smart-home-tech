@@ -1,0 +1,16 @@
+package ru.yandex.practicum.shoppingcart.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse notUnauthorized(final NotAuthorizedUserException e) {
+        return new ErrorResponse(e.getMessage());
+    }
+}
