@@ -1,20 +1,24 @@
-package ru.yandex.practicum.shoppingstore.dto;
+package ru.yandex.practicum.intersectionapi.dto;
 
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PageableDto {
-    @Min(0)
-    Integer page;
+@AllArgsConstructor
+@Builder
+public class DimensionDto {
+
     @Min(1)
-    Integer size;
-    List<String> sort;
+    Double width;
+
+    @Min(1)
+    Double height;
+
+    @Min(1)
+    Double depth;
 }

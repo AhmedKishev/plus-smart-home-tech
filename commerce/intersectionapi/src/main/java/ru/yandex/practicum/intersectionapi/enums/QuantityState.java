@@ -1,4 +1,4 @@
-package ru.yandex.practicum.shoppingstore.enums;
+package ru.yandex.practicum.intersectionapi.enums;
 
 public enum QuantityState {
     ENDED, FEW, ENOUGH, MANY

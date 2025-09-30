@@ -3,9 +3,10 @@ package ru.yandex.practicum.shoppingstore.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.shoppingstore.enums.ProductCategory;
-import ru.yandex.practicum.shoppingstore.enums.ProductState;
-import ru.yandex.practicum.shoppingstore.enums.QuantityState;
+import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
+import ru.yandex.practicum.intersectionapi.enums.ProductState;
+import ru.yandex.practicum.intersectionapi.enums.QuantityState;
+
 
 import java.util.UUID;
 

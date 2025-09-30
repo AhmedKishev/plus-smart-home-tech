@@ -1,7 +1,8 @@
 package ru.yandex.practicum.shoppingcart.mapper;
 
 
-import ru.yandex.practicum.shoppingcart.dto.ShoppingCartDto;
+
+import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
 import ru.yandex.practicum.shoppingcart.model.ShoppingCart;
 
 import java.util.Map;

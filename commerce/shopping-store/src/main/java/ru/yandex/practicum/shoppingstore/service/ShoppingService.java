@@ -2,11 +2,11 @@ package ru.yandex.practicum.shoppingstore.service;
 
 
 import org.springframework.data.domain.Page;
-import ru.yandex.practicum.shoppingstore.dto.ProductDto;
-import ru.yandex.practicum.shoppingstore.dto.SetProductQuantityStateRequest;
-import ru.yandex.practicum.shoppingstore.enums.ProductCategory;
 import org.springframework.data.domain.Pageable;
-import java.util.List;
+import ru.yandex.practicum.intersectionapi.dto.ProductDto;
+import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
+import ru.yandex.practicum.intersectionapi.request.SetProductQuantityStateRequest;
+
 import java.util.UUID;
 
 public interface ShoppingService {

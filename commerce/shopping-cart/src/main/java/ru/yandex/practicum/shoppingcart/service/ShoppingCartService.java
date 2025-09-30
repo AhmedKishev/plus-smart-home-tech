@@ -1,8 +1,9 @@
 package ru.yandex.practicum.shoppingcart.service;
 
 import jakarta.validation.Valid;
-import ru.yandex.practicum.shoppingcart.dto.ChangeProductQuantityRequest;
-import ru.yandex.practicum.shoppingcart.dto.ShoppingCartDto;
+import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
+import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
+
 
 import java.util.Map;
 import java.util.UUID;
@@ -16,5 +17,5 @@ public interface ShoppingCartService {
 
     ShoppingCartDto deleteByIds(String username, Map<UUID, Long> productIds);
 
-    ShoppingCartDto change(String username, @Valid ChangeProductQuantityRequest changeProductQuantityRequest);
+    ShoppingCartDto change(String username, @Valid  ChangeProductQuantityRequest changeProductQuantityRequest);
 }

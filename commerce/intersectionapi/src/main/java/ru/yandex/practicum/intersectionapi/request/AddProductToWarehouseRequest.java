@@ -1,12 +1,13 @@
-package ru.yandex.practicum.shoppingstore.dto;
+package ru.yandex.practicum.intersectionapi.request;
 
+
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.shoppingstore.enums.QuantityState;
 
 import java.util.UUID;
 
@@ -14,9 +15,12 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SetProductQuantityStateRequest {
+public class AddProductToWarehouseRequest {
+
     @NotNull
     UUID productId;
-    @NotNull
-    QuantityState quantityState;
+
+    @Min(1)
+    Long quantity;
+
 }

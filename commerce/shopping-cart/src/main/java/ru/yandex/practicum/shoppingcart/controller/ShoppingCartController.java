@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.shoppingcart.dto.ChangeProductQuantityRequest;
-import ru.yandex.practicum.shoppingcart.dto.ShoppingCartDto;
+import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
+import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
 import ru.yandex.practicum.shoppingcart.service.ShoppingCartService;
 
 import java.util.Map;

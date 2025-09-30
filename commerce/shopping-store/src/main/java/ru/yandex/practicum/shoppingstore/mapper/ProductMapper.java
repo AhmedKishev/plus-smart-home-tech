@@ -1,6 +1,7 @@
 package ru.yandex.practicum.shoppingstore.mapper;
 
-import ru.yandex.practicum.shoppingstore.dto.ProductDto;
+
+import ru.yandex.practicum.intersectionapi.dto.ProductDto;
 import ru.yandex.practicum.shoppingstore.model.Product;
 
 import java.util.List;
