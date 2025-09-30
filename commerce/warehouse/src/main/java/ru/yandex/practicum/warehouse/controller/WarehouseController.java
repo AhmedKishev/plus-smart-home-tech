@@ -8,6 +8,7 @@ import ru.yandex.practicum.intersectionapi.dto.BookedProductsDto;
 import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
 import ru.yandex.practicum.intersectionapi.request.AddProductToWarehouseRequest;
 import ru.yandex.practicum.intersectionapi.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.warehouse.service.WarehouseService;
 
 
 @RestController
