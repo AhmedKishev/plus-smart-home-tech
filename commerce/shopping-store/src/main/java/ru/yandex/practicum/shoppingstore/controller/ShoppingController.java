@@ -10,9 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.intersectionapi.dto.ProductDto;
-import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
-import ru.yandex.practicum.intersectionapi.request.SetProductQuantityStateRequest;
+import ru.yandex.practicum.api.dto.ProductDto;
+import ru.yandex.practicum.api.enums.ProductCategory;
+import ru.yandex.practicum.api.request.SetProductQuantityStateRequest;
 import ru.yandex.practicum.shoppingstore.service.ShoppingService;
 
 import java.util.UUID;

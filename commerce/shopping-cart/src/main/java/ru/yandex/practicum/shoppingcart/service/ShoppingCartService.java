@@ -1,8 +1,8 @@
 package ru.yandex.practicum.shoppingcart.service;
 
 import jakarta.validation.Valid;
-import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
-import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
+import ru.yandex.practicum.api.dto.ShoppingCartDto;
+import ru.yandex.practicum.api.request.ChangeProductQuantityRequest;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.interactionapi.error;
+package ru.yandex.practicum.api.error;
 
 import lombok.AccessLevel;
 import lombok.Builder;

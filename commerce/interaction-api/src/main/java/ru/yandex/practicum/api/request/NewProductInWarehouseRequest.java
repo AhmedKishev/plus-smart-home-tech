@@ -1,4 +1,4 @@
-package ru.yandex.practicum.intersectionapi.request;
+package ru.yandex.practicum.api.request;
 
 
 import jakarta.validation.constraints.Min;
@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.intersectionapi.dto.DimensionDto;
+import ru.yandex.practicum.api.dto.DimensionDto;
 
 import java.util.UUID;
 

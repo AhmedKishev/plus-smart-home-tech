@@ -1,4 +1,4 @@
-package ru.yandex.practicum.intersectionapi.dto;
+package ru.yandex.practicum.api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,9 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
-import ru.yandex.practicum.intersectionapi.enums.ProductState;
-import ru.yandex.practicum.intersectionapi.enums.QuantityState;
+import ru.yandex.practicum.api.enums.ProductCategory;
+import ru.yandex.practicum.api.enums.ProductState;
+import ru.yandex.practicum.api.enums.QuantityState;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.intersectionapi.request;
+package ru.yandex.practicum.api.request;
 
 
 import jakarta.validation.constraints.Min;

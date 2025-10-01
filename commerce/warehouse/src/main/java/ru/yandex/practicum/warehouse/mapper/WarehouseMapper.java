@@ -1,7 +1,7 @@
 package ru.yandex.practicum.warehouse.mapper;
 
-import ru.yandex.practicum.intersectionapi.dto.DimensionDto;
-import ru.yandex.practicum.intersectionapi.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.api.dto.DimensionDto;
+import ru.yandex.practicum.api.request.NewProductInWarehouseRequest;
 import ru.yandex.practicum.warehouse.model.Dimension;
 import ru.yandex.practicum.warehouse.model.Warehouse;
 

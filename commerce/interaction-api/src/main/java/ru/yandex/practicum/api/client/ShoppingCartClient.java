@@ -1,10 +1,10 @@
-package ru.yandex.practicum.intersectionapi.client;
+package ru.yandex.practicum.api.client;
 
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
-import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
+import ru.yandex.practicum.api.dto.ShoppingCartDto;
+import ru.yandex.practicum.api.request.ChangeProductQuantityRequest;
 
 import java.util.Map;
 import java.util.UUID;

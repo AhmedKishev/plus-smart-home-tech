@@ -1,4 +1,5 @@
-package ru.yandex.practicum.intersectionapi.request;
+package ru.yandex.practicum.api.request;
+
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -6,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.intersectionapi.enums.QuantityState;
 
 import java.util.UUID;
 
@@ -14,9 +14,12 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SetProductQuantityStateRequest {
+public class ChangeProductQuantityRequest {
+
     @NotNull
     UUID productId;
+
     @NotNull
-    QuantityState quantityState;
+    Long newQuantity;
+
 }

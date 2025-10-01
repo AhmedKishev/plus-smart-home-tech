@@ -3,9 +3,9 @@ package ru.yandex.practicum.shoppingstore.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ru.yandex.practicum.intersectionapi.dto.ProductDto;
-import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
-import ru.yandex.practicum.intersectionapi.request.SetProductQuantityStateRequest;
+import ru.yandex.practicum.api.dto.ProductDto;
+import ru.yandex.practicum.api.enums.ProductCategory;
+import ru.yandex.practicum.api.request.SetProductQuantityStateRequest;
 
 import java.util.UUID;
 

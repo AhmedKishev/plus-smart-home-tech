@@ -1,6 +1,6 @@
-package ru.yandex.practicum.intersectionapi.dto;
+package ru.yandex.practicum.api.dto;
 
-
+import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,14 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Builder
-public class BookedProductsDto {
+public class DimensionDto {
 
-    Double deliveryWeight;
+    @Min(1)
+    Double width;
 
-    Double deliveryVolume;
+    @Min(1)
+    Double height;
 
-    Boolean fragile;
-
+    @Min(1)
+    Double depth;
 }

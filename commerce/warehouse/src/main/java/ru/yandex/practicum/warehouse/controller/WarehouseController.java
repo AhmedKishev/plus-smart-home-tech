@@ -5,11 +5,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.intersectionapi.dto.AddressDto;
-import ru.yandex.practicum.intersectionapi.dto.BookedProductsDto;
-import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
-import ru.yandex.practicum.intersectionapi.request.AddProductToWarehouseRequest;
-import ru.yandex.practicum.intersectionapi.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.api.dto.AddressDto;
+import ru.yandex.practicum.api.dto.BookedProductsDto;
+import ru.yandex.practicum.api.dto.ShoppingCartDto;
+import ru.yandex.practicum.api.request.AddProductToWarehouseRequest;
+import ru.yandex.practicum.api.request.NewProductInWarehouseRequest;
 import ru.yandex.practicum.warehouse.service.WarehouseService;
 
 

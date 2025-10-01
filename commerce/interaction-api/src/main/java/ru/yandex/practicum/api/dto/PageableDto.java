@@ -1,4 +1,4 @@
-package ru.yandex.practicum.intersectionapi.dto;
+package ru.yandex.practicum.api.dto;
 
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
