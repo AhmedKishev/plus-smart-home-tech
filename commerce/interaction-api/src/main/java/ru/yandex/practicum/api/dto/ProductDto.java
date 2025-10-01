@@ -21,7 +21,7 @@ public class ProductDto {
 
     UUID productId;
     @NotBlank
-    private String productName;
+    String productName;
     @NotBlank
     String description;
     String imageSrc;
