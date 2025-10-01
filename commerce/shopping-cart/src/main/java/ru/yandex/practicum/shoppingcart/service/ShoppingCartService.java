@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
 import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
 
-
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public interface ShoppingCartService {
 
     ShoppingCartDto getCartByUsername(String username);
 
-    ShoppingCartDto deleteByIds(String username, Map<UUID, Long> productIds);
+    ShoppingCartDto deleteByIds(String username, List<UUID> productIds);
 
-    ShoppingCartDto change(String username, @Valid  ChangeProductQuantityRequest changeProductQuantityRequest);
+    ShoppingCartDto change(String username, @Valid ChangeProductQuantityRequest changeProductQuantityRequest);
 }

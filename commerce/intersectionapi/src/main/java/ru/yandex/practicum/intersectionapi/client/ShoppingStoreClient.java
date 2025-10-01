@@ -1,4 +1,4 @@
-package ru.yandex.practicum.interactionapi.feign;
+package ru.yandex.practicum.intersectionapi.client;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.intersectionapi.dto.PageableDto;
 import ru.yandex.practicum.intersectionapi.dto.ProductDto;
 import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
-import ru.yandex.practicum.intersectionapi.enums.QuantityState;
+import ru.yandex.practicum.intersectionapi.request.SetProductQuantityStateRequest;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +28,7 @@ public interface ShoppingStoreClient {
     Boolean removeProductFromStore(@RequestBody @NotNull UUID productId);
 
     @PostMapping("/quantityState")
-    Boolean setProductQuantityState(@RequestParam UUID productId, @RequestParam QuantityState quantityState);
+    ProductDto setProductQuantityState(@Valid @RequestBody SetProductQuantityStateRequest setProductQuantityStateRequest);
 
     @GetMapping("/{productId}")
     ProductDto getProduct(@PathVariable @NotNull UUID productId);

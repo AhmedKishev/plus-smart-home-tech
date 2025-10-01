@@ -10,6 +10,7 @@ import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
 import ru.yandex.practicum.intersectionapi.request.ChangeProductQuantityRequest;
 import ru.yandex.practicum.shoppingcart.service.ShoppingCartService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ public class ShoppingCartController {
 
     @PostMapping("/remove")
     ShoppingCartDto deleteProductsThrowId(@RequestParam String username,
-                                          @RequestBody Map<UUID, Long> productIds) {
+                                          @RequestBody List<UUID> productIds) {
         return service.deleteByIds(username, productIds);
     }
 

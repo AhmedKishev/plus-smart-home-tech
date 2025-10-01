@@ -7,7 +7,6 @@ import ru.yandex.practicum.intersectionapi.enums.ProductCategory;
 import ru.yandex.practicum.intersectionapi.enums.ProductState;
 import ru.yandex.practicum.intersectionapi.enums.QuantityState;
 
-
 import java.util.UUID;
 
 @Getter

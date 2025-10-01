@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.practicum.intersectionapi.client.ShoppingStoreClient;
 import ru.yandex.practicum.intersectionapi.dto.AddressDto;
 import ru.yandex.practicum.intersectionapi.dto.BookedProductsDto;
 import ru.yandex.practicum.intersectionapi.dto.ShoppingCartDto;
-import ru.yandex.practicum.intersectionapi.enums.QuantityState;
 import ru.yandex.practicum.intersectionapi.request.AddProductToWarehouseRequest;
 import ru.yandex.practicum.intersectionapi.request.NewProductInWarehouseRequest;
 import ru.yandex.practicum.warehouse.exception.NoSpecifiedProductInWarehouseException;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WarehouseServiceImpl implements WarehouseService {
     WarehouseRepository warehouseRepository;
-    ru.yandex.practicum.interactionapi.feign.ShoppingStoreClient shoppingStoreClient;
+    ShoppingStoreClient shoppingStoreClient;
 
     @Override
     public void newProductInWarehouse(NewProductInWarehouseRequest requestDto) {
@@ -42,6 +42,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         Warehouse warehouse = WarehouseMapper.toWarehouse(requestDto);
         warehouseRepository.save(warehouse);
     }
+
 
     @Override
     public BookedProductsDto checkProductQuantityEnoughForShoppingCart(ShoppingCartDto shoppingCartDto) {
@@ -71,8 +72,10 @@ public class WarehouseServiceImpl implements WarehouseService {
         Warehouse warehouse = warehouseRepository.findById(requestDto.getProductId()).orElseThrow(
                 () -> new NoSpecifiedProductInWarehouseException("Информация о товаре " + requestDto.getProductId() + " на складе не найдена.")
         );
-        warehouse.setQuantity(warehouse.getQuantity() + requestDto.getQuantity());
-        updateProductQuantityInShoppingStore(warehouse);
+        if (warehouse.getQuantity() == null) {
+            warehouse.setQuantity(requestDto.getQuantity());
+        } else
+            warehouse.setQuantity(warehouse.getQuantity() + requestDto.getQuantity());
     }
 
     @Override
@@ -101,23 +104,5 @@ public class WarehouseServiceImpl implements WarehouseService {
                         .sum())
                 .build();
     }
-
-    private void updateProductQuantityInShoppingStore(Warehouse product) {
-        UUID productId = product.getProductId();
-        QuantityState quantityState;
-        Long quantity = product.getQuantity();
-
-        if (quantity == 0) {
-            quantityState = QuantityState.ENDED;
-        } else if (quantity < 10) {
-            quantityState = QuantityState.ENOUGH;
-        } else if (quantity < 100) {
-            quantityState = QuantityState.FEW;
-        } else {
-            quantityState = QuantityState.MANY;
-        }
-        shoppingStoreClient.setProductQuantityState(productId, quantityState);
-    }
-
 
 }

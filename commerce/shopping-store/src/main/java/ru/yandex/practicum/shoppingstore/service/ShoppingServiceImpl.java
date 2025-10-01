@@ -82,6 +82,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 
     private Product findProductById(UUID productId) {
-        return shoppingRepository.findById(productId).orElseThrow(() -> new NotFoundProduct(String.format("Продукта с id: %d нет в наличии", productId)));
+        return shoppingRepository.findById(productId).orElseThrow(() -> new NotFoundProduct(String.format("Продукта с id: %s нет в наличии", productId)));
     }
 }

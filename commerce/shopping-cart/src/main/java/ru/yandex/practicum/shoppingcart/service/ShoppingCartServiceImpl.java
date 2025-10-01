@@ -13,6 +13,7 @@ import ru.yandex.practicum.shoppingcart.mapper.ShoppingCartMapper;
 import ru.yandex.practicum.shoppingcart.model.ShoppingCart;
 import ru.yandex.practicum.shoppingcart.repository.ShoppingCartRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,7 +27,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCartDto addProduct(String username, Map<UUID, Long> productsIdWithCount) {
         checkUsername(username);
-        ShoppingCart save = shoppingCartRepository.save(ShoppingCartMapper.toShoppingCart(username, productsIdWithCount));
+        ShoppingCart save;
+        if (shoppingCartRepository.findByUsername(username) != null) {
+            save = shoppingCartRepository.findByUsername(username);
+            Map<UUID, Long> oldProducts = save.getProducts();
+            for (Map.Entry<UUID, Long> newProduct : productsIdWithCount.entrySet()) {
+                UUID productId = newProduct.getKey();
+                Long newCount = newProduct.getValue();
+
+                oldProducts.put(productId, newCount);
+            }
+        } else
+            save = shoppingCartRepository.save(ShoppingCartMapper.toShoppingCart(username, productsIdWithCount));
 
         return ShoppingCartMapper.toShoppingCartDto(save);
     }
@@ -52,14 +64,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDto deleteByIds(String username, Map<UUID, Long> productIds) {
+    public ShoppingCartDto deleteByIds(String username, List<UUID> productIds) {
         checkUsername(username);
         ShoppingCart findByUsername = shoppingCartRepository.findByUsername(username);
         if (findByUsername == null) {
             throw new NoProductsInShoppingCartException("Пользователь " + username + " не имеет корзину покупок.");
         }
 
-        findByUsername.setProducts(productIds);
+        Map<UUID, Long> products = findByUsername.getProducts();
+
+        for (UUID productId : productIds) {
+            products.remove(productId);
+        }
+
+        findByUsername.setProducts(products);
 
         return ShoppingCartMapper.toShoppingCartDto(shoppingCartRepository.save(findByUsername));
     }
