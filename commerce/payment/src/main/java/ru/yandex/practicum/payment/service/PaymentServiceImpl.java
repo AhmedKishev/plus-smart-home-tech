@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.practicum.api.client.OrderClient;
 import ru.yandex.practicum.api.client.ShoppingStoreClient;
 import ru.yandex.practicum.api.dto.OrderDto;
 import ru.yandex.practicum.api.dto.PaymentDto;
@@ -19,9 +21,11 @@ import java.util.UUID;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
+@Transactional
 public class PaymentServiceImpl implements PaymentService {
     PaymentRepository paymentRepository;
     ShoppingStoreClient shoppingStoreClient;
+    OrderClient orderClient;
 
     @Override
     public Double checkProductCost(OrderDto orderDto) {
@@ -50,6 +54,25 @@ public class PaymentServiceImpl implements PaymentService {
                 .status(PaymentState.PENDING)
                 .build();
         return PaymentMapper.toPaymentDto(paymentRepository.save(payment));
+    }
+
+    @Override
+    public Double calculateTotalCostOrder(OrderDto orderDto) {
+        return orderDto.getProductPrice() + getTax(orderDto.getProductPrice()) + orderDto.getDeliveryPrice();
+    }
+
+    @Override
+    public void refundPayment(UUID paymentId) {
+        Payment paymentById = paymentRepository.findById(paymentId).get();
+
+        orderClient.paymentOrder(paymentById.getOrderId());
+    }
+
+    @Override
+    public void failedPayment(UUID paymentId) {
+        Payment paymentById = paymentRepository.findById(paymentId).get();
+
+        orderClient.paymentFailed(paymentById.getOrderId());
     }
 
 

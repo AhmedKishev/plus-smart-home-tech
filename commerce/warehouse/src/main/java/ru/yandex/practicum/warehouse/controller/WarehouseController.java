@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.api.dto.AddressDto;
 import ru.yandex.practicum.api.dto.BookedProductsDto;
 import ru.yandex.practicum.api.dto.ShoppingCartDto;
-import ru.yandex.practicum.api.request.AddProductToWarehouseRequest;
-import ru.yandex.practicum.api.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.api.request.*;
 import ru.yandex.practicum.warehouse.service.WarehouseService;
+
+import java.util.Map;
+import java.util.UUID;
 
 
 @RestController
@@ -39,4 +41,22 @@ public class WarehouseController {
     public AddressDto getAddress() {
         return warehouseService.getAddress();
     }
+
+
+    @PostMapping("/shipped")
+    void shippedOrder(@RequestBody ShippedToDeliveryRequest shippedToDeliveryRequest) {
+        warehouseService.shippedOrder(shippedToDeliveryRequest);
+    }
+
+    @PostMapping("/return")
+    void returnOrder(@RequestBody Map<UUID, Long> products) {
+        warehouseService.returnOrder(products);
+    }
+
+    @PostMapping("/assembly")
+    BookedProductsDto assemblyOrder(@RequestBody AssemblyProductsForOrderRequest assemblyProductsForOrderRequest) {
+        return warehouseService.assemblyProductForOrderFromShoppingCart(assemblyProductsForOrderRequest);
+    }
+
+
 }

@@ -11,6 +11,8 @@ import ru.yandex.practicum.api.dto.OrderDto;
 import ru.yandex.practicum.api.dto.PaymentDto;
 import ru.yandex.practicum.payment.service.PaymentService;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/payment")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -29,5 +31,18 @@ public class PaymentController {
         return paymentService.createPayment(orderDto);
     }
 
+    @PostMapping("/totalCost")
+    Double calculateTotalCostOrder(@RequestBody OrderDto orderDto) {
+        return paymentService.calculateTotalCostOrder(orderDto);
+    }
 
+    @PostMapping("/refund")
+    void refundPayment(@RequestBody UUID paymentId) {
+        paymentService.refundPayment(paymentId);
+    }
+
+    @PostMapping("/failed")
+    void failedPayment(@RequestBody UUID paymentId) {
+        paymentService.failedPayment(paymentId);
+    }
 }

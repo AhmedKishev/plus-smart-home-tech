@@ -11,6 +11,11 @@ import ru.yandex.practicum.api.dto.BookedProductsDto;
 import ru.yandex.practicum.api.dto.ShoppingCartDto;
 import ru.yandex.practicum.api.request.AddProductToWarehouseRequest;
 import ru.yandex.practicum.api.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.api.request.ProductReturnRequest;
+import ru.yandex.practicum.api.request.ShippedToDeliveryRequest;
+
+import java.util.Map;
+import java.util.UUID;
 
 @FeignClient(name = "warehouse", path = "/api/v1/warehouse")
 public interface WarehouseClient {
@@ -29,4 +34,16 @@ public interface WarehouseClient {
 
     @PostMapping("/booking")
     BookedProductsDto bookingProducts(@RequestBody @Valid ShoppingCartDto shoppingCartDto);
+
+
+    @PostMapping("/shipped")
+    void shippedOrder(@RequestBody ShippedToDeliveryRequest shippedToDeliveryRequest);
+
+
+    @PostMapping("/return")
+    void returnOrder(@RequestBody Map<UUID, Long> products);
+
+    @PostMapping("/assembly")
+    BookedProductsDto assemblyOrder(@RequestBody ProductReturnRequest productReturnRequest);
+
 }

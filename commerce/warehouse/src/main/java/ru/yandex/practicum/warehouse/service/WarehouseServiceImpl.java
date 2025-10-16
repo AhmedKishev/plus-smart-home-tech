@@ -10,20 +10,22 @@ import ru.yandex.practicum.api.dto.AddressDto;
 import ru.yandex.practicum.api.dto.BookedProductsDto;
 import ru.yandex.practicum.api.dto.ShoppingCartDto;
 import ru.yandex.practicum.api.request.AddProductToWarehouseRequest;
+import ru.yandex.practicum.api.request.AssemblyProductsForOrderRequest;
 import ru.yandex.practicum.api.request.NewProductInWarehouseRequest;
+import ru.yandex.practicum.api.request.ShippedToDeliveryRequest;
 import ru.yandex.practicum.warehouse.exception.NoSpecifiedProductInWarehouseException;
 import ru.yandex.practicum.warehouse.exception.ProductInShoppingCartLowQuantityInWarehouseException;
 import ru.yandex.practicum.warehouse.exception.ProductNotFoundInWarehouseException;
 import ru.yandex.practicum.warehouse.exception.SpecifiedProductAlreadyInWarehouseException;
+import ru.yandex.practicum.warehouse.mapper.BookingMapper;
 import ru.yandex.practicum.warehouse.mapper.WarehouseMapper;
 import ru.yandex.practicum.warehouse.model.Address;
+import ru.yandex.practicum.warehouse.model.Booking;
 import ru.yandex.practicum.warehouse.model.Warehouse;
+import ru.yandex.practicum.warehouse.repository.BookingRepository;
 import ru.yandex.practicum.warehouse.repository.WarehouseRepository;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,7 @@ import java.util.stream.Collectors;
 public class WarehouseServiceImpl implements WarehouseService {
     WarehouseRepository warehouseRepository;
     ShoppingStoreClient shoppingStoreClient;
+    BookingRepository bookingRepository;
 
     @Override
     public void newProductInWarehouse(NewProductInWarehouseRequest requestDto) {
@@ -89,6 +92,45 @@ public class WarehouseServiceImpl implements WarehouseService {
                 .house(address)
                 .flat(address)
                 .build();
+    }
+
+    @Override
+    public void shippedOrder(ShippedToDeliveryRequest shippedToDeliveryRequest) {
+        Booking booking = bookingRepository.findByOrderId(shippedToDeliveryRequest.getOrderId());
+        booking.setDeliveryId(shippedToDeliveryRequest.getDeliveryId());
+    }
+
+    @Override
+    public void returnOrder(Map<UUID, Long> products) {
+        List<Warehouse> warehouses = warehouseRepository.findAll();
+
+        warehouses.stream()
+                .filter(warehouse -> products.containsKey(warehouse.getProductId()))
+                .forEach(warehouse -> {
+                    UUID productId = warehouse.getProductId();
+                    Long quantityToAdd = products.get(productId);
+                    warehouse.setQuantity(warehouse.getQuantity() + quantityToAdd);
+                    warehouseRepository.save(warehouse);
+                });
+    }
+
+    @Override
+    public BookedProductsDto assemblyProductForOrderFromShoppingCart(AssemblyProductsForOrderRequest assemblyProductsForOrderRequest) {
+        Booking booking = bookingRepository.findByOrderId(assemblyProductsForOrderRequest.getOrderId());
+
+        Map<UUID, Long> productsInBooking = booking.getProducts();
+        List<Warehouse> productsInWarehouse = warehouseRepository.findAllById(productsInBooking.keySet());
+        productsInWarehouse.forEach(warehouse -> {
+            if (warehouse.getQuantity() < productsInBooking.get(warehouse.getProductId())) {
+                throw new ProductInShoppingCartLowQuantityInWarehouseException("Ошибка, товар из корзины не находится в требуемом количестве на складе.");
+            }
+        });
+        for (Warehouse warehouse : productsInWarehouse) {
+            warehouse.setQuantity(warehouse.getQuantity() - productsInBooking.get(warehouse.getProductId()));
+        }
+        booking.setOrderId(assemblyProductsForOrderRequest.getOrderId());
+        return BookingMapper.toBookedProductsDto(booking);
+
     }
 
     private BookedProductsDto getBookedProducts(Collection<Warehouse> productList,
