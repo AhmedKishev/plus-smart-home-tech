@@ -73,7 +73,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public void addProductToWarehouse(AddProductToWarehouseRequest requestDto) {
         Warehouse warehouse = warehouseRepository.findById(requestDto.getProductId()).orElseThrow(
-                () -> new NoSpecifiedProductInWarehouseException("Информация о товаре " + requestDto.getProductId() + " на складе не найдена.")
+                () -> new NoSpecifiedProductInWarehouseException(String.format("Информация о товаре c id: %s  на складе не найдена.", requestDto.getProductId()))
         );
         if (warehouse.getQuantity() == null) {
             warehouse.setQuantity(requestDto.getQuantity());

@@ -178,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
 
     private Order getOrderById(UUID orderId) {
         return orderRepository.findById(orderId)
-                .orElseThrow(() -> new NoOrderFoundException("Заказ не зарегистрирован"));
+                .orElseThrow(() -> new NoOrderFoundException(String.format("Заказ с id: %s не зарегистрирован", orderId)));
     }
 
 }

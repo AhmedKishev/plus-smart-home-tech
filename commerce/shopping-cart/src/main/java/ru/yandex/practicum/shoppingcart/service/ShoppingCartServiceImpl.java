@@ -68,7 +68,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         checkUsername(username);
         ShoppingCart findByUsername = shoppingCartRepository.findByUsername(username);
         if (findByUsername == null) {
-            throw new NoProductsInShoppingCartException("Пользователь " + username + " не имеет корзину покупок.");
+            throw new NoProductsInShoppingCartException(String.format("Пользователь %s не имеет корзину покупок.", username));
         }
 
         Map<UUID, Long> products = findByUsername.getProducts();
@@ -88,7 +88,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart findByUsername = shoppingCartRepository.findByUsername(username);
 
         if (findByUsername == null) {
-            throw new NoProductsInShoppingCartException("Пользователь " + username + " не имеет корзину покупок.");
+            throw new NoProductsInShoppingCartException(String.format("Пользователь %s не имеет корзину покупок.", username));
         }
 
         Map<UUID, Long> products = findByUsername.getProducts();

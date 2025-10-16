@@ -37,7 +37,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         Double baseCost = 5.0;
 
         Delivery deliveryById = deliveryRepository.findByOrderId(orderDto.getOrderId())
-                .orElseThrow(() -> new NoDeliveryFoundException("Не найден заказ"));
+                .orElseThrow(() -> new NoDeliveryFoundException(String.format("Не найден заказ c id: %s", orderDto.getOrderId())));
 
         if (deliveryById.getFromAddress().getCity().contains(ADDRESS1)) {
             baseCost *= 1;
@@ -93,6 +93,6 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     private Delivery getDeliveryById(UUID deliveryId) {
         return deliveryRepository.findById(deliveryId)
-                .orElseThrow(() -> new NoDeliveryFoundException("Доставка не зарегистрирована"));
+                .orElseThrow(() -> new NoDeliveryFoundException(String.format("Доставка с id: %s не зарегистрирована", deliveryId)));
     }
 }

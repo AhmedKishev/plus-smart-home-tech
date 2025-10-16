@@ -32,7 +32,7 @@ public class PaymentServiceImpl implements PaymentService {
         Map<UUID, Long> products = orderDto.getProducts();
         Double totalProductPrice = 0.0;
         if (products == null) {
-            throw new NotEnoughInfoInOrderToCalculateException("Не хватает данных для расчет стоимости товаров");
+            throw new NotEnoughInfoInOrderToCalculateException("Не хватает данных для расчета стоимости товаров");
         }
         for (Map.Entry<UUID, Long> entry : products.entrySet()) {
             UUID productId = entry.getKey();
