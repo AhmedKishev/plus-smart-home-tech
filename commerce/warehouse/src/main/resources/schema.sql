@@ -7,5 +7,23 @@ CREATE TABLE warehouse_product (
     width DOUBLE PRECISION,
     height DOUBLE PRECISION,
     depth DOUBLE PRECISION,
-    weight DOUBLE PRECISION
+    weight DOUBLE PRECISION,
+    deliveryId DOUBLE PRECISION
 );
+
+
+create table if not exists bookings
+(
+    shopping_cart_id uuid primary key,
+    delivery_weight  double precision not null,
+    delivery_volume  double precision not null,
+    fragile          boolean          not null,
+    order_id         uuid
+);
+
+create table if not exists booking_products
+(
+    shopping_cart_id uuid references bookings (shopping_cart_id) on delete cascade primary key,
+    product_id       uuid not null,
+    quantity         integer
+    )

@@ -30,4 +30,7 @@ public class Warehouse {
 
     @Column(name = "weight")
     Double weight;
+
+    @Column(name = "deliveryId")
+    UUID deliveryId;
 }
