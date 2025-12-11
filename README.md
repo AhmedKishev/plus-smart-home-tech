@@ -1,6 +1,7 @@
 # Телеметрическая платформа для умного дома
 
-Java  Spring  sql  Postgresql  intellij  Maven  Docker  apachekafka  grpc  postman 
+## Languages and tools:
+![](https://assets.getpostman.com/common-share/postman-github-logo.png) 
 
 # Описание проекта
 Платформа для сбора, обработки и анализа телеметрии от датчиков умного дома. Система автоматически анализирует данные с датчиков и запускает соответствующие сценарии умного дома.
