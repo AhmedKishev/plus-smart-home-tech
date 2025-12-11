@@ -66,5 +66,5 @@
 Этот модуль является точкой входа для всего приложения и запускается на порту `localhost:8080`. Все запросы распределяются оттуда через роуты. 
 
 Документация API: 
-[](./collector.json)
+https://github.com/AhmedKishev/plus-smart-home-tech/blob/main/collector.json
 
