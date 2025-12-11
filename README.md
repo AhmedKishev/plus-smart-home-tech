@@ -2,7 +2,7 @@
 
 ## Languages and tools:
 <img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/84662d6f-0e6e-4d1a-b36e-e94facdcc94a" />
-<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/f039f46a-b04b-4326-9dbb-2494e965fa09" />
+<img width="100" height="150" alt="image" src="https://github.com/user-attachments/assets/f039f46a-b04b-4326-9dbb-2494e965fa09" />
 <img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/1ab3619e-8ac8-4129-9882-aa5f9bf29998" />
 
 <img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/bd5946ba-3da3-4df3-bcf7-90181cc43c38" />
