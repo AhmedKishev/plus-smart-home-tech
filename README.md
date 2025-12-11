@@ -65,6 +65,9 @@
 ## • Gateway
 Этот модуль является точкой входа для всего приложения и запускается на порту `localhost:8080`. Все запросы распределяются оттуда через роуты. 
 
-Документация API: 
-https://github.com/AhmedKishev/plus-smart-home-tech/blob/main/collector.json
+• Документация API: 
+[collector.json](json/collector.json),
+[shopping-cart.json](json/shopping-cart.json), [shopping-store.json](json/shopping-store.json), [warehouse.json](json/warehouse.json)
+
+• API Gateway: http://localhost:8080
 

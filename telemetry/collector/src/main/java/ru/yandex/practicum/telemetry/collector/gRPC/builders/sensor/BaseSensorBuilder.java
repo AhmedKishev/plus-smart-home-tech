@@ -16,7 +16,6 @@ public abstract class BaseSensorBuilder implements SensorEventBuilder {
     private final KafkaEventProducer producer;
 
     @Value("${topic.telemetry-sensors}")
-
     private String topic;
 
     @Override
