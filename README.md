@@ -1,9 +1,7 @@
 # Телеметрическая платформа для умного дома
 
-## Languages and tools:
-![](https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/java/java-original-wordmark.svg) 
-
-<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/bd5946ba-3da3-4df3-bcf7-90181cc43c38" />
+## Languages and tools: 
+<img width="100" height="100" alt="image" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/java/java-original-wordmark.svg" />
 
 
 # Описание проекта
