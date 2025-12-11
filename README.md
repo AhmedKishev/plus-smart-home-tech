@@ -10,6 +10,8 @@
   <img width="100" height="100" alt="Maven" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/maven/maven-original.svg" />
   <img width="100" height="100" alt="gRPC" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/grpc/grpc-plain.svg" />
   <img width="100" height="100" alt="Docker" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/docker/docker-plain.svg" />
+  <img width="100" height="100" alt="Docker" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/postman/postman-original.svg" />
+  <img width="100" height="100" alt="Docker" src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/swagger/swagger-original.svg" />
 </p>
 
 # Описание проекта
