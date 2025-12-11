@@ -1,7 +1,7 @@
 # Телеметрическая платформа для умного дома
 
 ## Languages and tools:
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/72e949b9-62f1-4b2f-b922-c6ce7b37a685" />
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/72e949b9-62f1-4b2f-b922-c6ce7b37a685" />
 
 # Описание проекта
 Платформа для сбора, обработки и анализа телеметрии от датчиков умного дома. Система автоматически анализирует данные с датчиков и запускает соответствующие сценарии умного дома.
