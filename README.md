@@ -1,7 +1,15 @@
 # Телеметрическая платформа для умного дома
 
 ## Languages and tools:
-![](https://s3-alpha.figma.com/hub/file/2168893076433463439/c4dcef19-0ae5-4291-bb16-0221a5f7faf5-cover.png), ![](https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2015/09/Apache-kafka-edureka.png), ![](https://i.pinimg.com/originals/a4/b6/f4/a4b6f46c4f61009b09a300457621699f.png), ![](https://camo.githubusercontent.com/6e44a38d35bce6e0b36264cd1e8e9d0a5f13dbff12792e25187c617728a7714f/68747470733a2f2f696d6167652e706e676161612e636f6d2f3537392f323435393537392d6d6964646c652e706e67), ![](https://upload.wikimedia.org/wikipedia/commons/f/f4/R_%281%29ds.png), ![](https://camo.githubusercontent.com/97a6a7999ec37c90cdfa35cacbdc246bd25443ab74a22f436829bda4716da4e6/68747470733a2f2f66696368612e746563682f73746f726167652f3936362f636f6e76657273696f6e732f5a7a5565597853634e426758337778306264516146477a5358665243434a2d6d657461535735305a577873615570665355524651563970593239754c6e42755a773d3d2d2d6c617267652e706e67), ![](https://avatars.mds.yandex.net/i?id=ad16ce1bda97bc6cc629b59ec6b214c3f7e0de9a-9100543-images-thumbs&n=13)
+<div align="center">
+  <img src="https://s3-alpha.figma.com/hub/file/2168893076433463439/c4dcef19-0ae5-4291-bb16-0221a5f7faf5-cover.png" width="80" height="80" alt="Figma" style="margin: 0 10px;">
+  <img src="https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2015/09/Apache-kafka-edureka.png" width="80" height="80" alt="Kafka" style="margin: 0 10px;">
+  <img src="https://i.pinimg.com/originals/a4/b6/f4/a4b6f46c4f61009b09a300457621699f.png" width="80" height="80" alt="Spring" style="margin: 0 10px;">
+  <img src="https://camo.githubusercontent.com/6e44a38d35bce6e0b36264cd1e8e9d0a5f13dbff12792e25187c617728a7714f/68747470733a2f2f696d6167652e706e676161612e636f6d2f3537392f323435393537392d6d6964646c652e706e67" width="80" height="80" alt="Java" style="margin: 0 10px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/R_%281%29ds.png" width="80" height="80" alt="R" style="margin: 0 10px;">
+  <img src="https://camo.githubusercontent.com/97a6a7999ec37c90cdfa35cacbdc246bd25443ab74a22f436829bda4716da4e6/68747470733a2f2f66696368612e746563682f73746f726167652f3936362f636f6e76657273696f6e732f5a7a5565597853634e426758337778306264516146477a5358665243434a2d6d657461535735305a577873615570665355524651563970593239754c6e42755a773d3d2d2d6c617267652e706e67" width="80" height="80" alt="Database" style="margin: 0 10px;">
+  <img src="https://avatars.mds.yandex.net/i?id=ad16ce1bda97bc6cc629b59ec6b214c3f7e0de9a-9100543-images-thumbs&n=13" width="80" height="80" alt="Tool" style="margin: 0 10px;">
+</div>
 
 # Описание проекта
 Платформа для сбора, обработки и анализа телеметрии от датчиков умного дома. Система автоматически анализирует данные с датчиков и запускает соответствующие сценарии умного дома.
