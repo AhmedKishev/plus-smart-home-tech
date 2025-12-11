@@ -1,6 +1,7 @@
 # Телеметрическая платформа для умного дома
 
 ## Languages and tools:
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/84662d6f-0e6e-4d1a-b36e-e94facdcc94a" />
 <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/72e949b9-62f1-4b2f-b922-c6ce7b37a685" />
 
 # Описание проекта
