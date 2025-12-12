@@ -1,4 +1,4 @@
-# Телеметрическая платформа для умного дома
+# Smart Home Tech
 
 ## Languages and tools: 
 <p style="display: flex; gap: 10px; flex-wrap: wrap;">
