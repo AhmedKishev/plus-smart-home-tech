@@ -71,6 +71,7 @@
 
 • Документация API: 
 [collector.json](json/collector.json), [shopping-cart.json](json/shopping-cart.json), [shopping-store.json](json/shopping-store.json), [warehouse.json](json/warehouse.json)
+
 • API Gateway: http://localhost:8080
 
 ##  Быстрый старт
