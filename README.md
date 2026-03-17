@@ -68,9 +68,10 @@
 ## • Подмодуль gateway-server
 Подмодуль `gateway-server` является входным шлюзом для всех входящих запросов, оттуда они адресуются в соответствующие контроллеры через роуты. Данный модуль реализует паттерн `API Gateway`. 
 
+
 • Документация API: 
-[collector.json](json/collector.json),
-[shopping-cart.json](json/shopping-cart.json), [shopping-store.json](json/shopping-store.json), [warehouse.json](json/warehouse.json)
+[collector.json](json/collector.json), [shopping-cart.json](json/shopping-cart.json), [shopping-store.json](json/shopping-store.json), [warehouse.json](json/warehouse.json)
+• API Gateway: http://localhost:8080
 
 ##  Быстрый старт
 
@@ -89,6 +90,4 @@ mvn clean package
 
 # Запуск всех тестов
 mvn test
-
-• API Gateway: http://localhost:8080
 
