@@ -72,5 +72,23 @@
 [collector.json](json/collector.json),
 [shopping-cart.json](json/shopping-cart.json), [shopping-store.json](json/shopping-store.json), [warehouse.json](json/warehouse.json)
 
+##  Быстрый старт
+
+### Предварительные требования
+- Java 17+
+- Docker и Docker Compose
+- Maven
+
+### Запуск инфраструктуры
+```bash
+# Запуск Kafka и PostgreSQL
+docker-compose up -d
+
+# Сборка проекта
+mvn clean package
+
+# Запуск всех тестов
+mvn test
+
 • API Gateway: http://localhost:8080
 
